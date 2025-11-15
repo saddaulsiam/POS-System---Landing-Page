@@ -1,3 +1,5 @@
+import TestimonialCarousel from "../client/TestimonialCarousel";
+
 export default function Testimonials() {
   const testimonials = [
     {
@@ -50,7 +52,8 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        {/* Desktop View */}
+        <div className="hidden grid-cols-1 gap-8 md:grid md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
@@ -100,6 +103,9 @@ export default function Testimonials() {
             </div>
           ))}
         </div>
+
+        {/* Mobile Carousel */}
+        <TestimonialCarousel testimonials={testimonials} />
 
         {/* Trust badges */}
         <div className="mt-20 rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">

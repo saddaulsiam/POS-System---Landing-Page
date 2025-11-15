@@ -1,3 +1,5 @@
+import AnimatedSection from "../ui/AnimatedSection";
+
 export default function HowItWorks() {
   const steps = [
     {
@@ -64,45 +66,51 @@ export default function HowItWorks() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
-            <div key={index} className="group relative">
-              {/* Connector line */}
-              {index < steps.length - 1 && (
-                <div className="absolute top-16 left-full hidden h-0.5 w-full -translate-x-8 bg-linear-to-r from-blue-300 to-blue-100 lg:block" />
-              )}
+            <AnimatedSection
+              key={index}
+              animation="fade-up"
+              delay={index * 150}
+            >
+              <div className="group relative">
+                {/* Connector line */}
+                {index < steps.length - 1 && (
+                  <div className="absolute top-16 left-full hidden h-0.5 w-full -translate-x-8 bg-linear-to-r from-blue-300 to-blue-100 lg:block" />
+                )}
 
-              <div className="relative h-full overflow-hidden rounded-2xl border-2 border-blue-100 bg-linear-to-br from-blue-50 to-white p-8 transition-all duration-300 hover:-translate-y-2 hover:border-blue-300 hover:shadow-2xl">
-                {/* Step Number Badge */}
-                <div className="absolute top-4 right-4 flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-blue-600 to-indigo-600 text-sm font-bold text-white opacity-80 shadow-md">
-                  {step.number}
+                <div className="relative h-full overflow-hidden rounded-2xl border-2 border-blue-100 bg-linear-to-br from-blue-50 to-white p-8 transition-all duration-300 hover:-translate-y-2 hover:border-blue-300 hover:shadow-2xl">
+                  {/* Step Number Badge */}
+                  <div className="absolute top-4 right-4 flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-blue-600 to-indigo-600 text-sm font-bold text-white opacity-80 shadow-md">
+                    {step.number}
+                  </div>
+
+                  {/* Icon */}
+                  <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-white text-5xl shadow-lg ring-2 ring-blue-100 transition-transform group-hover:scale-110 group-hover:rotate-3">
+                    {step.icon}
+                  </div>
+
+                  {/* Step Label */}
+                  <div className="mb-3 text-xs font-bold tracking-wider text-blue-600 uppercase">
+                    Step {step.number}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="mb-4 text-xl font-bold text-gray-900">
+                    {step.title}
+                  </h3>
+
+                  {/* Divider */}
+                  <div className="mb-4 h-1 w-12 rounded-full bg-linear-to-r from-blue-600 to-indigo-600"></div>
+
+                  {/* Description */}
+                  <p className="leading-relaxed text-gray-600">
+                    {step.description}
+                  </p>
+
+                  {/* Hover Gradient Overlay */}
+                  <div className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-blue-600/0 to-indigo-600/0 opacity-0 transition-opacity group-hover:opacity-5"></div>
                 </div>
-
-                {/* Icon */}
-                <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-white text-5xl shadow-lg ring-2 ring-blue-100 transition-transform group-hover:scale-110 group-hover:rotate-3">
-                  {step.icon}
-                </div>
-
-                {/* Step Label */}
-                <div className="mb-3 text-xs font-bold tracking-wider text-blue-600 uppercase">
-                  Step {step.number}
-                </div>
-
-                {/* Title */}
-                <h3 className="mb-4 text-xl font-bold text-gray-900">
-                  {step.title}
-                </h3>
-
-                {/* Divider */}
-                <div className="mb-4 h-1 w-12 rounded-full bg-linear-to-r from-blue-600 to-indigo-600"></div>
-
-                {/* Description */}
-                <p className="leading-relaxed text-gray-600">
-                  {step.description}
-                </p>
-
-                {/* Hover Gradient Overlay */}
-                <div className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-blue-600/0 to-indigo-600/0 opacity-0 transition-opacity group-hover:opacity-5"></div>
               </div>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
 

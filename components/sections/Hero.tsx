@@ -1,12 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import VideoModal from "../client/VideoModal";
 
 export default function Hero() {
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-
   return (
     <section className="relative bg-linear-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
       {/* Animated background elements */}
@@ -48,12 +44,7 @@ export default function Hero() {
                   →
                 </span>
               </a>
-              <button
-                onClick={() => setIsVideoModalOpen(true)}
-                className="cursor-pointer rounded-xl border-2 border-white/30 bg-transparent px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all hover:bg-blue-800/50"
-              >
-                Watch Demo
-              </button>
+              <VideoModal />
             </div>
 
             <div className="flex flex-wrap justify-center gap-4 text-sm text-blue-100 lg:justify-start lg:gap-6">
@@ -150,54 +141,6 @@ export default function Hero() {
           />
         </svg>
       </div>
-
-      {/* Video Modal */}
-      {isVideoModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-          onClick={() => setIsVideoModalOpen(false)}
-        >
-          <div
-            className="relative w-full max-w-8xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={() => setIsVideoModalOpen(false)}
-              className="absolute -top-12 right-0 text-white transition-colors hover:text-gray-300"
-              aria-label="Close video"
-            >
-              <svg
-                className="h-8 w-8"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-
-            {/* Video container */}
-            <div
-              className="relative overflow-hidden rounded-2xl bg-black shadow-2xl"
-              style={{ paddingBottom: "56.25%" }}
-            >
-              <iframe
-                className="absolute top-0 left-0 h-full w-full"
-                src="https://www.youtube.com/embed/9bZkp7q19f0?autoplay=1"
-                title="POS System Demo"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import PricingToggle from "../client/PricingToggle";
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -85,31 +86,7 @@ export default function Pricing() {
           </p>
 
           {/* Toggle */}
-          <div className="inline-flex items-center rounded-full bg-white p-1.5 shadow-md">
-            <button
-              onClick={() => setIsAnnual(false)}
-              className={`rounded-full px-6 py-2.5 font-semibold transition-all duration-300 ${
-                !isAnnual
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "text-gray-600 hover:text-gray-900"
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setIsAnnual(true)}
-              className={`rounded-full px-6 py-2.5 font-semibold transition-all duration-300 ${
-                isAnnual
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "text-gray-600 hover:text-gray-900"
-              }`}
-            >
-              Annual
-              <span className="ml-2 rounded-full bg-green-100 px-2.5 py-1 text-xs font-bold text-green-700">
-                Save 15%
-              </span>
-            </button>
-          </div>
+          <PricingToggle onToggle={setIsAnnual} />
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">

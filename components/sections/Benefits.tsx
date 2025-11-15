@@ -1,3 +1,5 @@
+import AnimatedSection from "../ui/AnimatedSection";
+
 export default function Benefits() {
   const benefits = [
     {
@@ -123,36 +125,42 @@ export default function Benefits() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {benefits.map((benefit, index) => (
-            <div key={index} className="group">
-              <div className="relative h-full overflow-hidden rounded-2xl border border-gray-200 bg-white p-8 shadow-xs transition-all duration-300 hover:-translate-y-2 hover:border-blue-300 hover:shadow-lg">
-                {/* Icon Badge */}
-                <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-blue-500 to-indigo-600 text-white shadow-md transition-transform group-hover:scale-110 group-hover:rotate-3">
-                  {benefit.icon}
+            <AnimatedSection
+              key={index}
+              animation="fade-up"
+              delay={index * 100}
+            >
+              <div className="group">
+                <div className="relative h-full overflow-hidden rounded-2xl border border-gray-200 bg-white p-8 shadow-xs transition-all duration-300 hover:-translate-y-2 hover:border-blue-300 hover:shadow-lg">
+                  {/* Icon Badge */}
+                  <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-blue-500 to-indigo-600 text-white shadow-md transition-transform group-hover:scale-110 group-hover:rotate-3">
+                    {benefit.icon}
+                  </div>
+
+                  {/* Stat */}
+                  <div className="mb-2 bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-5xl font-bold text-transparent">
+                    {benefit.stat}
+                  </div>
+
+                  {/* Label */}
+                  <div className="mb-4 text-sm font-semibold tracking-wide text-blue-600 uppercase">
+                    {benefit.label}
+                  </div>
+
+                  {/* Divider */}
+                  <div className="mb-4 h-1 w-12 rounded-full bg-linear-to-r from-blue-600 to-indigo-600"></div>
+
+                  {/* Title & Description */}
+                  <h3 className="mb-3 text-xl font-bold text-gray-900">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-600">{benefit.description}</p>
+
+                  {/* Hover Gradient Overlay */}
+                  <div className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-blue-600/0 to-indigo-600/0 opacity-0 transition-opacity group-hover:opacity-5"></div>
                 </div>
-
-                {/* Stat */}
-                <div className="mb-2 bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-5xl font-bold text-transparent">
-                  {benefit.stat}
-                </div>
-
-                {/* Label */}
-                <div className="mb-4 text-sm font-semibold tracking-wide text-blue-600 uppercase">
-                  {benefit.label}
-                </div>
-
-                {/* Divider */}
-                <div className="mb-4 h-1 w-12 rounded-full bg-linear-to-r from-blue-600 to-indigo-600"></div>
-
-                {/* Title & Description */}
-                <h3 className="mb-3 text-xl font-bold text-gray-900">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600">{benefit.description}</p>
-
-                {/* Hover Gradient Overlay */}
-                <div className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-blue-600/0 to-indigo-600/0 opacity-0 transition-opacity group-hover:opacity-5"></div>
               </div>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

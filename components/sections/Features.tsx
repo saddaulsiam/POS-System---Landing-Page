@@ -1,3 +1,5 @@
+import AnimatedSection from "../ui/AnimatedSection";
+
 export default function Features() {
   const features = [
     {
@@ -91,18 +93,21 @@ export default function Features() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
-            <div
+            <AnimatedSection
               key={index}
-              className="group rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
+              animation="fade-up"
+              delay={index * 100}
             >
-              <div className="mb-4 text-5xl transition-transform group-hover:scale-110">
-                {feature.icon}
+              <div className="group rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl">
+                <div className="mb-4 text-5xl transition-transform group-hover:scale-110">
+                  {feature.icon}
+                </div>
+                <h3 className="mb-3 text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
-              <h3 className="mb-3 text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>
