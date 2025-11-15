@@ -1,60 +1,78 @@
+"use client";
 import AnimatedSection from "../ui/AnimatedSection";
+import { useState } from "react";
+import FeatureDemoModal from "../ui/FeatureDemoModal";
 
 export default function Features() {
+  const [demoFeature, setDemoFeature] = useState<{
+    title: string;
+    demoUrl: string;
+    description: string;
+  } | null>(null);
+
   const features = [
     {
       icon: "🛒",
       title: "Fast Checkout",
       description:
         "Lightning-fast barcode scanning and intuitive interface for quick customer checkout.",
+      demoUrl: "https://www.youtube.com/embed/1Q8fG0TtVAY", // Example video
     },
     {
       icon: "📦",
       title: "Inventory Management",
       description:
         "Real-time stock tracking, low stock alerts, and automatic reorder notifications.",
+      demoUrl: "https://www.youtube.com/embed/2Vv-BfVoq4g",
     },
     {
       icon: "📊",
       title: "Sales Analytics",
       description:
         "Detailed reports and insights to help you make data-driven business decisions.",
+      demoUrl: "https://www.youtube.com/embed/3fumBcKC6RE",
     },
     {
       icon: "👥",
       title: "Customer Management",
       description:
         "Track customer purchases, loyalty programs, and personalized promotions.",
+      demoUrl: "https://www.youtube.com/embed/4UZrsTqkcW4",
     },
     {
       icon: "💰",
       title: "Multiple Payment Methods",
       description:
         "Accept cash, cards, mobile payments, and split payments seamlessly.",
+      demoUrl: "https://www.youtube.com/embed/5qap5aO4i9A",
     },
     {
       icon: "👨‍💼",
       title: "Employee Management",
       description:
         "Role-based access, time tracking, and payroll integration for your team.",
+      demoUrl: "https://www.youtube.com/embed/6Dh-RL__uN4",
     },
     {
       icon: "🧾",
       title: "Receipt Printing",
       description:
         "Professional receipts with your branding, both thermal and standard printing.",
+      demoUrl: "https://www.youtube.com/embed/7QUtEmBT_-w",
     },
     {
       icon: "🔄",
       title: "Product Variants",
       description:
         "Manage products with multiple sizes, colors, and variations effortlessly.",
+      demoUrl: "https://www.youtube.com/embed/8ZcmTl_1ER8",
     },
     {
       icon: "📱",
       title: "Desktop & Web",
       description:
         "Works on desktop application and web browser for maximum flexibility.",
+      demoUrl: "https://www.youtube.com/embed/9bZkp7q19f0",
     },
   ];
 
@@ -98,7 +116,7 @@ export default function Features() {
               animation="fade-up"
               delay={index * 100}
             >
-              <div className="group rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl">
+              <div className="group rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg">
                 <div className="mb-4 text-5xl transition-transform group-hover:scale-110">
                   {feature.icon}
                 </div>
@@ -106,11 +124,21 @@ export default function Features() {
                   {feature.title}
                 </h3>
                 <p className="text-gray-600">{feature.description}</p>
+                <button
+                  onClick={() => setDemoFeature(feature)}
+                  className="relative mt-4 inline-flex cursor-pointer items-center justify-center rounded-full border-2 border-blue-300 bg-white px-3 py-1.5 text-sm font-medium text-blue-600 shadow-xs transition-all duration-200 hover:border-blue-400 hover:bg-blue-100/70 hover:shadow-md focus:ring-2 focus:ring-blue-300 focus:outline-none active:scale-[0.97]"
+                >
+                  View Demo
+                </button>
               </div>
             </AnimatedSection>
           ))}
         </div>
       </div>
+      <FeatureDemoModal
+        feature={demoFeature}
+        onClose={() => setDemoFeature(null)}
+      />
     </section>
   );
 }
