@@ -1,3 +1,5 @@
+import ScrollToTop from "@/components/ui/ScrollToTop";
+import WhatsAppChatButton from "@/components/ui/WhatsAppChatButton";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -13,16 +15,23 @@ export const metadata: Metadata = {
   authors: [{ name: "Your Company Name" }],
   openGraph: {
     title: "Smart POS System - Complete Point of Sale Solution",
-    description: "Modern, easy-to-use POS system for retail stores, restaurants, and service businesses.",
+    description:
+      "Modern, easy-to-use POS system for retail stores, restaurants, and service businesses.",
     type: "website",
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className} suppressHydrationWarning>
         {children}
+        <WhatsAppChatButton />
+        <ScrollToTop />
       </body>
     </html>
   );

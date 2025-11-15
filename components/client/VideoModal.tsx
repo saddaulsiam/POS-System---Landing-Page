@@ -24,7 +24,7 @@ export default function VideoModal() {
             onClick={() => setIsVideoModalOpen(false)}
           >
             <div
-              className="animate-in zoom-in slide-in-from-bottom-4 max-w-8xl relative w-full duration-500"
+              className="animate-in zoom-in slide-in-from-bottom-4 relative w-full max-w-7xl duration-500"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close button */}
