@@ -19,7 +19,7 @@ function Toast({
     <div className="animate-fade-in relative mr-4 flex max-w-[220px] items-center rounded-lg border-2 border-green-500 bg-white px-4 py-2 shadow-lg">
       <button
         onClick={onClose}
-        className="ext-gray-400 absolute -top-3 -left-3 rounded-full bg-white p-1 text-gray-400 hover:text-gray-700 focus:outline-none"
+        className="ext-gray-400 absolute -top-3 -left-3 cursor-pointer rounded-full bg-white p-1 text-gray-400 hover:text-gray-700 focus:outline-none"
         aria-label="Close toast"
       >
         <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
@@ -46,7 +46,7 @@ function Toast({
 }
 
 function WhatsAppChatButton() {
-  const phone = "8801719824784";
+  const phone = "8801311333277";
   const message = encodeURIComponent(
     "Hello! I have a question about your POS system.",
   );

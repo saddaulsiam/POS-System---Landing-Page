@@ -18,7 +18,7 @@ export default function PricingToggle({ onToggle }: PricingToggleProps) {
     <div className="inline-flex items-center rounded-full bg-white p-1.5 shadow-md">
       <button
         onClick={() => handleToggle(false)}
-        className={`rounded-full px-6 py-2.5 font-semibold transition-all duration-300 ${
+        className={`cursor-pointer rounded-full px-6 py-2.5 font-semibold transition-all duration-300 ${
           !isAnnual
             ? "bg-blue-600 text-white shadow-lg"
             : "text-gray-600 hover:text-gray-900"
@@ -28,7 +28,7 @@ export default function PricingToggle({ onToggle }: PricingToggleProps) {
       </button>
       <button
         onClick={() => handleToggle(true)}
-        className={`rounded-full px-6 py-2.5 font-semibold transition-all duration-300 ${
+        className={`cursor-pointer rounded-full px-6 py-2.5 font-semibold transition-all duration-300 ${
           isAnnual
             ? "bg-blue-600 text-white shadow-lg"
             : "text-gray-600 hover:text-gray-900"

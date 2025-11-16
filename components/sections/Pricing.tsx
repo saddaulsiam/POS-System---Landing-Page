@@ -1,43 +1,42 @@
 "use client";
 
-import { useRef, useState } from "react";
-
+import { BadgeCheck, Headphones, RefreshCw, ShieldCheck } from "lucide-react";
+import { useState } from "react";
 import PricingToggle from "../client/PricingToggle";
 import AnimatedSection from "../ui/AnimatedSection";
-import Modal from "../ui/Modal";
-
-type ModalType = "trial" | "contact" | null;
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(false);
-  const [modal, setModal] = useState<ModalType>(null);
-  // Form states
-  const [contactForm, setContactForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
-  const contactEmailRef = useRef<HTMLInputElement>(null);
 
   const plans = [
     {
       name: "Starter",
       price: isAnnual ? 29 : 39,
       period: isAnnual ? "/month (billed annually)" : "/month",
-      description: "All the essentials for small shops and new businesses.",
+      description: "Perfect for new businesses.",
       features: [
-        "Up to 3 users",
-        "Unlimited products",
-        "Basic reports",
-        "Email support",
-        "Receipt printing",
-        "Inventory management",
-        "Customer management",
+        { name: "User Logins: 3 Cashier, 1 Manager", active: true },
+        { name: "Products: Up to 300", active: true },
+        { name: "Manage Inventory", active: true },
+        { name: "Manage Customer Profiles", active: true },
+        { name: "Employee Management", active: false },
+        { name: "Product Variants", active: false },
+        { name: "Sales Reports: Basic", active: true },
+        { name: "Print Receipts", active: true },
+        { name: "Custom Receipts", active: true },
+        { name: "Parked Sales", active: false },
+        { name: "Loyalty Programs", active: false },
+        { name: "Multi-Location (outlet) Management", active: false },
+        {
+          name: "Custom Integrations & Development Service",
+          active: false,
+        },
+        { name: "Dedicated Account Manager", active: false },
+        { name: "Training: Online", active: true },
+        { name: "Support Channel: Email", active: true },
+        { name: "24/7 Phone Support", active: true },
       ],
-      cta: "Start Free Trial",
+      cta: "Start 3 Months Free Trial",
       popular: false,
     },
     {
@@ -46,74 +45,61 @@ export default function Pricing() {
       period: isAnnual ? "/month (billed annually)" : "/month",
       description: "For growing businesses that need more power",
       features: [
-        "Unlimited users",
-        "Unlimited products",
-        "Advanced analytics",
-        "Priority support",
-        "Product variants",
-        "Employee management",
-        "Loyalty programs",
-        "Parked sales",
-        "Custom receipts",
+        { name: "User Logins: 10 Cashier, 3 Manager", active: true },
+        { name: "Unlimited Products", active: true },
+        { name: "Manage Inventory", active: true },
+        { name: "Manage Customer Profiles", active: true },
+        { name: "Employee Management", active: true },
+        { name: "Product Variants", active: true },
+        { name: "Sales Reports: Advanced", active: true },
+        { name: "Print Receipts", active: true },
+        { name: "Custom Receipts", active: true },
+        { name: "Parked Sales", active: true },
+        { name: "Loyalty Programs", active: true },
+        { name: "Multi-Location (outlet) Management", active: false },
+        {
+          name: "Custom Integrations & Development Service",
+          active: false,
+        },
+        { name: "Dedicated Account Manager", active: false },
+        { name: "Training: Online", active: true },
+        { name: "Support Channel: Priority Email & Chat", active: true },
+        { name: "24/7 Phone Support", active: true },
       ],
-      cta: "Start Free Trial",
+      cta: "Purchase",
       popular: true,
     },
     {
       name: "Enterprise",
-      price: "Custom",
-      period: "",
+      price: isAnnual ? 99 : 129,
+      period: isAnnual ? "/month (billed annually)" : "/month",
       description: "For large businesses with custom needs",
       features: [
-        "Everything in Professional",
-        "Multiple locations",
-        "Custom integrations",
-        "Dedicated account manager",
-        "On-site training",
-        "Custom development",
-        "SLA guarantee",
-        "24/7 phone support",
+        { name: "User Logins: 10 Cashier, 3 Manager", active: true },
+        { name: "Unlimited Products", active: true },
+        { name: "Manage Inventory", active: true },
+        { name: "Manage Customer Profiles", active: true },
+        { name: "Employee Management", active: true },
+        { name: "Product Variants", active: true },
+        { name: "Sales Reports: Advanced", active: true },
+        { name: "Print Receipts", active: true },
+        { name: "Custom Receipts", active: true },
+        { name: "Parked Sales", active: true },
+        { name: "Loyalty Programs", active: true },
+        { name: "Multi-Location (outlet) Management", active: true },
+        {
+          name: "Custom Integrations & Development Service",
+          active: true,
+        },
+        { name: "Dedicated Account Manager", active: true },
+        { name: "Personalized Onboarding & Training", active: true },
+        { name: "Dedicated Enterprise Support Queue", active: true },
+        { name: "24/7 Phone Support", active: true },
       ],
-      cta: "Contact Sales",
+      cta: "Purchase",
       popular: false,
     },
   ];
-
-  // Email validation
-  function validateEmail(email: string) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  // Handle contact form submit
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    if (!contactForm.name || !contactForm.email || !contactForm.message) {
-      setError("Please fill in all fields.");
-      return;
-    }
-    if (!validateEmail(contactForm.email)) {
-      setError("Please enter a valid email address.");
-      contactEmailRef.current?.focus();
-      return;
-    }
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
-    }, 1200);
-  };
-
-  // Reset modal state
-  const closeModal = () => {
-    setModal(null);
-    setTimeout(() => {
-      setContactForm({ name: "", email: "", message: "" });
-      setLoading(false);
-      setSuccess(false);
-      setError("");
-    }, 300);
-  };
 
   return (
     <section id="pricing" className="relative overflow-hidden bg-white py-20">
@@ -126,16 +112,33 @@ export default function Pricing() {
         <div className="mb-16 text-center">
           <div className="mb-4 inline-block">
             <span className="rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
-              Pricing
+              Plans and pricing
             </span>
           </div>
-          <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
+          <h2 className="mb-5 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
             Simple, Transparent Pricing
           </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-xl text-gray-600">
+          <p className="mx-auto max-w-2xl text-lg text-gray-600">
             Choose the plan that&apos;s right for your business. All plans
             include a 60-day free trial.
           </p>
+
+          <div className="mt-5 mb-8 flex items-center justify-center space-x-10 text-sm text-gray-500">
+            <p className="flex items-center justify-center gap-2">
+              <Headphones className="size-4" />
+              24/7 support
+            </p>
+
+            <p className="flex items-center justify-center gap-2">
+              <ShieldCheck className="size-4" />
+              30-day money-back guarantee
+            </p>
+
+            <p className="flex items-center justify-center gap-2">
+              <RefreshCw className="size-4" />
+              Cancel anytime
+            </p>
+          </div>
 
           {/* Toggle */}
           <PricingToggle onToggle={setIsAnnual} />
@@ -192,20 +195,38 @@ export default function Pricing() {
               <ul className="mb-8 space-y-4">
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-100">
-                      <svg
-                        className="h-4 w-4 text-green-600"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                    <div
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${feature.active ? "bg-green-100" : "bg-red-100"}`}
+                    >
+                      {feature.active ? (
+                        <svg
+                          className="h-4 w-4 text-green-600"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          className="h-4 w-4 text-red-500"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      )}
                     </div>
-                    <span className="text-gray-700">{feature}</span>
+                    <span className="text-gray-700">{feature.name}</span>
                   </li>
                 ))}
               </ul>
@@ -220,30 +241,17 @@ export default function Pricing() {
                       : "bg-gray-100 text-gray-900 hover:scale-105 hover:bg-gray-200"
                   }`}
                 >
-                  Start Free Trial
+                  {plan.cta}
                 </a>
-              ) : plan.cta === "Contact Sales" ? (
-                <button
-                  type="button"
-                  onClick={() => setModal("contact")}
-                  className={`block w-full rounded-xl px-6 py-3.5 text-center font-bold transition-all duration-300 ${
-                    plan.popular
-                      ? "bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:scale-105 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl"
-                      : "bg-gray-100 text-gray-900 hover:scale-105 hover:bg-gray-200"
-                  }`}
-                >
-                  Contact Sales
-                </button>
               ) : (
                 <button
                   type="button"
                   // Replace with your purchase logic or link
-                  className={`block w-full rounded-xl px-6 py-3.5 text-center font-bold transition-all duration-300 ${
+                  className={`block w-full cursor-pointer rounded-xl px-6 py-3.5 text-center font-bold transition-all duration-300 ${
                     plan.popular
                       ? "bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:scale-105 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl"
                       : "bg-gray-100 text-gray-900 hover:scale-105 hover:bg-gray-200"
                   }`}
-                  disabled
                 >
                   Purchase
                 </button>
@@ -252,111 +260,14 @@ export default function Pricing() {
           ))}
         </div>
       </div>
+
       {/* Secure checkout note */}
       <div className="mt-12 flex flex-col items-center">
-        <div className="flex items-center gap-2 text-xs text-gray-500">
-          <svg
-            className="h-4 w-4 text-green-500"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="2"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 12l2 2 4-4"
-            />
-          </svg>
+        <p className="flex items-center gap-2 text-sm text-gray-500">
+          <BadgeCheck className="size-4 text-green-500" />
           100% Secure Checkout — SSL Encrypted
-        </div>
+        </p>
       </div>
-
-      {/* Contact Modal */}
-      <Modal
-        open={modal === "contact"}
-        onClose={closeModal}
-        title="Contact Sales"
-      >
-        {success ? (
-          <div className="flex flex-col items-center justify-center py-8">
-            <svg
-              className="mb-4 h-12 w-12 text-green-500"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-            <div className="mb-2 text-lg font-semibold text-green-700">
-              Message Sent!
-            </div>
-            <div className="mb-4 text-gray-600">
-              Our team will contact you soon.
-            </div>
-            <button
-              onClick={closeModal}
-              className="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700"
-            >
-              Close
-            </button>
-          </div>
-        ) : (
-          <form className="space-y-4" onSubmit={handleContactSubmit}>
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full rounded border px-3 py-2"
-              value={contactForm.name}
-              onChange={(e) =>
-                setContactForm((f) => ({ ...f, name: e.target.value }))
-              }
-              disabled={loading}
-            />
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full rounded border px-3 py-2"
-              value={contactForm.email}
-              onChange={(e) =>
-                setContactForm((f) => ({ ...f, email: e.target.value }))
-              }
-              ref={contactEmailRef}
-              disabled={loading}
-            />
-            <textarea
-              placeholder="Your Message"
-              className="w-full rounded border px-3 py-2"
-              rows={3}
-              value={contactForm.message}
-              onChange={(e) =>
-                setContactForm((f) => ({ ...f, message: e.target.value }))
-              }
-              disabled={loading}
-            ></textarea>
-            {error && <div className="text-sm text-red-600">{error}</div>}
-            <button
-              type="submit"
-              className="w-full rounded bg-blue-600 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-60"
-              disabled={loading}
-            >
-              {loading ? "Sending..." : "Send Message"}
-            </button>
-          </form>
-        )}
-      </Modal>
     </section>
   );
 }
