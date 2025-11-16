@@ -231,31 +231,17 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              {/* Only Starter plan offers free trial, but now it scrolls to #contact */}
-              {plan.name === "Starter" ? (
-                <a
-                  href="#contact"
-                  className={`block w-full rounded-xl px-6 py-3.5 text-center font-bold transition-all duration-300 ${
-                    plan.popular
-                      ? "bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:scale-105 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl"
-                      : "bg-gray-100 text-gray-900 hover:scale-105 hover:bg-gray-200"
-                  }`}
-                >
-                  {plan.cta}
-                </a>
-              ) : (
-                <button
-                  type="button"
-                  // Replace with your purchase logic or link
-                  className={`block w-full cursor-pointer rounded-xl px-6 py-3.5 text-center font-bold transition-all duration-300 ${
-                    plan.popular
-                      ? "bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:scale-105 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl"
-                      : "bg-gray-100 text-gray-900 hover:scale-105 hover:bg-gray-200"
-                  }`}
-                >
-                  Purchase
-                </button>
-              )}
+              <button
+                type="button"
+                // Replace with your purchase logic or link
+                className={`block w-full cursor-pointer rounded-xl px-6 py-3.5 text-center font-bold transition-all duration-300 ${
+                  plan.popular
+                    ? "bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:scale-105 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl"
+                    : "bg-gray-100 text-gray-900 hover:scale-105 hover:bg-gray-200"
+                }`}
+              >
+                {plan.cta}
+              </button>
             </AnimatedSection>
           ))}
         </div>

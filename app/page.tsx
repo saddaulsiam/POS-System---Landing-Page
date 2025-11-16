@@ -1,5 +1,5 @@
 import Benefits from "@/components/sections/Benefits";
-import CTA from "@/components/sections/CTA";
+import ContactForm from "@/components/sections/ContactForm";
 import FAQ from "@/components/sections/FAQ";
 import Features from "@/components/sections/Features";
 import Hero from "@/components/sections/Hero";
@@ -22,7 +22,7 @@ export default function Home() {
       <Testimonials />
       <Pricing />
       <FAQ />
-      <CTA />
+      <ContactForm />
       <Footer />
     </main>
   );
